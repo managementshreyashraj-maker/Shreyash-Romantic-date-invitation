@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-color: #fff3ec;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Respect mobile safe areas across the whole experience. */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-x {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Entrance animation for the invitation content. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Gentle floating hearts drifting upward. */
+@keyframes float-heart {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--heart-opacity, 0.5);
+  }
+  50% {
+    transform: translateY(-55vh) scale(1.05) rotate(8deg);
+  }
+  90% {
+    opacity: var(--heart-opacity, 0.5);
+  }
+  100% {
+    transform: translateY(-115vh) scale(0.9) rotate(-6deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-heart {
+  animation: float-heart var(--heart-duration, 12s) ease-in-out infinite;
+  animation-delay: var(--heart-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* Soft pulse for the YES button. */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px -12px rgba(192, 66, 90, 0.35);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 16px 38px -10px rgba(192, 66, 90, 0.45);
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 3.2s ease-in-out infinite;
+}
+
+/* Success heart pop. */
+@keyframes heart-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-heart-pop {
+  animation: heart-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Screen-to-screen transition: fade + slight scale/slide. */
+@keyframes screen-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-screen-enter {
+  animation: screen-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Joyful pulse for the celebration heart. */
+@keyframes celebrate-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.animate-celebrate-pulse {
+  animation: celebrate-pulse 1.8s ease-in-out infinite;
+}
+
+/* Confetti pieces drifting down once and fading out. */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--confetti-drift, 0px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-confetti-fall {
+  animation: confetti-fall var(--confetti-duration, 3s) ease-in forwards;
+  animation-delay: var(--confetti-delay, 0s);
+  will-change: transform, opacity;
+}
+
+/* Sparkle twinkle for the decorative icon above the title. */
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.7; transform: scale(0.9) rotate(12deg); }
+}
+
+.animate-sparkle-twinkle {
+  animation: sparkle-twinkle 2.4s ease-in-out infinite;
+}
+
+/* Heart beat pulse for the final success state. */
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.18); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.14); }
+  60% { transform: scale(1); }
+}
+
+.animate-heart-beat {
+  animation: heart-beat 1.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Month grid cross-fade when navigating months. */
+@keyframes month-change {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-month-change {
+  animation: month-change 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-float-heart,
+  .animate-soft-pulse,
+  .animate-heart-pop,
+  .animate-screen-enter,
+  .animate-celebrate-pulse,
+  .animate-confetti-fall,
+  .animate-month-change {
+    animation: none !important;
+  }
+  .animate-fade-in-up {
+    opacity: 1 !important;
+  }
+}
